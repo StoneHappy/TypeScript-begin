@@ -25,9 +25,11 @@ module.exports = {
     ],
 
     devServer: {
-        static:'./static'
+        static: './static'
     },
-
+    resolve: {
+        extensions: ['.ts', '.js']
+    },
     module: {
         rules: [
 
@@ -46,21 +48,22 @@ module.exports = {
                 type: 'asset/resource'
             },
 
+            // {
+            //     test: /\.ts$/,
+            //     exclude: /node_modules/,
+            //     use:
+            //         [
+            //             'ts-loader'
+            //         ]
+            // },
             {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use:
-                    [
-                        'babel-loader'
-                    ]
-            },
-            {
-                test: /\.ts$/,
-                exclude: /node_modules/,
-                use:
-                    [
-                        'babel-loader'
-                    ]
+                test: /\.ts?$/,
+                exclude: [/node_modules/, /dist/],
+                use: [
+                    {
+                        loader: 'babel-loader',
+                    },
+                ],
             },
             {
                 test: /\.css$/,
